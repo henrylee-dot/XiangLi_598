@@ -30,31 +30,58 @@ The written manual is in `src/MINI_Upgrade_Kit/KIMLAB_MINI_Upgrade_Kit_manual.pd
 
 ## Setup
 
-Ubuntu 20.04 (WSL2), ROS Noetic, Python 3.8.
+Ubuntu 20.04 (tested under WSL2 on Windows), ROS Noetic, Python 3.8. The workspace can be cloned to any folder.
 
 ```bash
-cd ~/ws_mini && catkin_make
-# MuJoCo simulator environment
+# 1. ROS and system packages
+sudo apt install ros-noetic-desktop-full ros-noetic-dynamixel-sdk \
+    ros-noetic-ros-control ros-noetic-ros-controllers python3-pip python3-venv
+# 2. Build
+git clone https://github.com/henrylee-dot/XiangLi_598.git ws_mini && cd ws_mini
+source /opt/ros/noetic/setup.bash && catkin_make
+# 3. MuJoCo simulator environment (upgrade pip first: the venv's default pip is too old)
 cd src/MINI_Upgrade_Kit/mini_ros_simulation/robotis_mini_mujoco
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-# Pose estimation (system python): mediapipe 0.10.11 needs --no-deps on Python 3.8
+python3 -m venv .venv && .venv/bin/pip install -U "pip<25" && .venv/bin/pip install -r requirements.txt
+cd -
+# 4. Pose estimation (system python): mediapipe 0.10.11 is the last release for Python 3.8
+#    and must be installed with --no-deps (its jaxlib dependency has no Python 3.8 build)
 pip3 install --user --no-deps mediapipe==0.10.11
 pip3 install --user absl-py attrs "flatbuffers>=2.0" "protobuf>=3.11,<4" opencv-contrib-python==4.10.0.84 sounddevice
+# 5. Device permissions (camera, U2D2); log out/in (or `wsl --shutdown`) afterwards
+sudo usermod -aG video,dialout $USER
 ```
+
+**WSL2 only**: USB devices must be passed into WSL with [usbipd-win](https://github.com/dorssel/usbipd-win) on Windows (`usbipd bind --busid <BUSID> --force` once as admin, then `usbipd attach --wsl --busid <BUSID>` after every reboot or re-plug; find the BUSID with `usbipd list`). On native Ubuntu this step is not needed.
+
+**External USB camera** (`camera_source:=win`): some cameras cannot go through usbipd (uncompressed YUYV only). Capture them on Windows instead: install Python with `opencv-python` on Windows and run `vision/win_camera_sender.py` there (see Run).
+
+**Real robot**: connect the U2D2 to the PC (it appears as `/dev/ttyUSB0`). Joint directions can differ between robots, so check yours before the first run with the tools in `src/final_project/tools/` (with the robot suspended): `dxl_scan.py` (read-only scan), `dxl_joint_test.py` (one joint at a time), `dxl_pose_test.py zero` (all joints to 0°). Record the result in `src/final_project/config/real_robot_calibration.yaml`.
 
 ## Run
 
 ```bash
-source ~/ws_mini/devel/setup.bash
+source devel/setup.bash
 # Simulation, laptop camera (/dev/video0)
 roslaunch final_project mujoco_imitation.launch camera_source:=0
-# Real robot (U2D2 on /dev/ttyUSB0); keep the robot suspended on first runs
+# Simulation, external camera streamed from Windows (second terminal)
+roslaunch final_project mujoco_imitation.launch camera_source:=win
+python.exe "$(wslpath -w vision/win_camera_sender.py)" 0 $(hostname -I | cut -d' ' -f1)
+# Real robot; keep it suspended on first runs, unplug power to stop in an emergency
 roslaunch final_project real_imitation.launch camera_source:=0 imitate_legs:=true
 ```
 
-Useful arguments: `imitate_legs:=false` (arms only), `balance_filter:=false`, `camera_source:=win` (external camera streamed from Windows with `vision/win_camera_sender.py`), `log_file:=<path>.npz`.
+Useful arguments: `imitate_legs:=false` (arms only; the real-robot default), `balance_filter:=false`, `log_file:=<path>.npz`. Stand with your whole body in view for about a second before the robot starts following. Backspace in the MuJoCo window resets the simulated robot.
 
-See `src/final_project/docs/` for the midterm report (Chinese and English LaTeX sources) with design details, test results, camera/U2D2 setup under WSL2, and troubleshooting.
+Offline check without camera or robot (simulation regression test of the center-of-mass filter):
+
+```bash
+cd src/MINI_Upgrade_Kit/mini_ros_simulation
+robotis_mini_mujoco/.venv/bin/python3 ../../final_project/tools/test_balance_filter.py \
+    robotis_mini_description/urdf/mini_scene.xml ../../final_project/src \
+    ../../final_project/tools ../../final_project/config/mini_mass_model.json
+```
+
+See `src/final_project/docs/` for the midterm report (Chinese and English LaTeX sources) with design details, test results and troubleshooting.
 
 ## Copyright / 版权
 
