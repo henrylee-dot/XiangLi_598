@@ -118,8 +118,10 @@ class FrameLogger:
 
 def main():
     rospy.init_node('pose_imitation')
+    # Default: <workspace>/vision/, found relative to this file (src/final_project/src/)
+    workspace = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..')
     model_path = os.path.expanduser(rospy.get_param(
-        '~model_path', '~/ws_mini/vision/pose_landmarker_full.task'))
+        '~model_path', os.path.join(workspace, 'vision', 'pose_landmarker_full.task')))
     camera_source = str(rospy.get_param('~camera_source', '0'))
     use_windows_stream = camera_source == 'win'
     rotate_180 = rospy.get_param('~rotate_180', use_windows_stream)

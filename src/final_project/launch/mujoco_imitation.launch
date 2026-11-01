@@ -5,7 +5,7 @@
   <arg name="imitate_legs" default="true"/>
   <!-- Center-of-mass safety filter on leg commands -->
   <arg name="balance_filter" default="true"/>
-  <arg name="model_path" default="$(env HOME)/ws_mini/vision/pose_landmarker_full.task"/>
+  <arg name="model_path" default="$(find final_project)/../../vision/pose_landmarker_full.task"/>
   <!-- Per-frame timing/landmark/command log (.npz); empty = off -->
   <arg name="log_file" default=""/>
 
