@@ -1,0 +1,235 @@
+<mujoco model="robotis_mini">
+  <compiler angle="radian" meshdir="../meshes/"/>
+  <default>
+    <default class="XL320_Motor">
+      <joint damping="0.01" armature="0.001" frictionloss="0.2"/>
+    </default>
+  </default>
+
+  <asset>
+    <mesh name="DMB-B02(W)_s" file="DMB-B02(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="DMF-B01(W)_s" file="DMF-B01(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="XL-320D" file="XL-320D.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="DMF-F01(W)_s" file="DMF-F01(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="SPU-5(W)_s" file="SPU-5(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="DMF-B03(W)_s" file="DMF-B03(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="SPO-5(GR)_s" file="SPO-5(GR).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="DMF-B04(W)_s" file="DMF-B04(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="SPD-3B3(W)_s" file="SPD-3B3(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="SPD-3B5(W)_s" file="SPD-3B5(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="SPL-2B2(W)_s" file="SPL-2B2(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="SPD-4B5(W)_s" file="SPD-4B5(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="SPD-7V4(W)_s" file="SPD-7V4(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="DMF-B05(W)_s" file="DMF-B05(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="SPD-3B7(W)_s" file="SPD-3B7(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="DMF-B06(W)_s" file="DMF-B06(W).stl" scale="0.001 0.001 0.001"/>
+    <mesh name="DMF-B07(GR)_s" file="DMF-B07(GR).stl" scale="0.001 0.001 0.001"/>
+  </asset>
+
+  <worldbody>
+    <body name="torso" pos="0 0 0.2">
+      <joint name="floating_base_joint" type="free" limited="false" actuatorfrclimited="false" />
+      <body name="imu_link" pos="0 0 0">
+        <site name="imu_site" pos="0 0 0" size="0.01"/>
+      </body>
+      <body name="camera_link" pos="0.03 0 0.04" euler="0 -1.5707 -1.5707">
+        <camera name="camera" mode="fixed" fovy="64.37" resolution="640 480"/>
+      </body>      
+      <geom quat="0.5 0.5 0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="DMB-B02(W)_s" />
+      <geom pos="-0.015 0 0.042" quat="0.5 0.5 0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="DMF-B01(W)_s" />
+      <geom pos="-0.009 0 0.078" quat="0 0.707107 0.707107 0" type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+      <geom pos="-0.009 0 0.075" quat="0.5 0.5 0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="DMF-F01(W)_s" />
+      <geom size="0.035 0.011 0.011" pos="-0.032 0 0.011" quat="0.5 0.5 0.5 0.5" type="box" rgba="1 1 1 1" />
+      <geom size="0.035 0.011 0.011" pos="-0.004 0 0.016" quat="0.5 0.5 0.5 0.5" type="box" rgba="1 1 1 1" />
+      <geom pos="0.009 0.024 0.042" quat="-0.5 0.5 0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="SPU-5(W)_s" />
+      <geom pos="-0.015 0.024 0.042" quat="-0.5 0.5 -0.5 -0.5" type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+      <geom pos="0.009 -0.024 0.042" quat="-0.5 0.5 0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="SPU-5(W)_s" />
+      <geom pos="-0.015 -0.024 0.042" quat="-0.5 -0.5 0.5 -0.5" type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+      <geom pos="-0.033 0.024 -0.006" quat="0.5 0.5 0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="SPU-5(W)_s" />
+      <geom pos="-0.033 0.024 -0.03" quat="-0.5 0.5 -0.5 0.5" type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+      <geom pos="-0.033 -0.024 -0.006" quat="0.5 0.5 0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="SPU-5(W)_s" />
+      <geom pos="-0.033 -0.024 -0.03" quat="-0.5 0.5 -0.5 0.5" type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+      <body name="l_shoulder_link" pos="-0.015 0.024 0.042" quat="-0.5 0.5 -0.5 -0.5">
+        <inertial pos="0.00462267 0 0.0238587" quat="0.664434 0.664434 0.241925 -0.241925" mass="0.0052" diaginertia="1.58386e-06 1.2293e-06 6.62659e-07"/>
+        <joint name="l_shoulder_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true" actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+        <geom pos="0.012 0 0.033" quat="0.5 0.5 -0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="DMF-B03(W)_s" />
+        <body name="l_biceps_link" pos="0.012 0 0.033" quat="0 0 -0.707107 0.707107">
+          <inertial pos="0.000969731 -0.0120233 1.58733e-05" quat="0.706018 0.708112 0.00756559 0.00763653" mass="0.0281" diaginertia="8.04878e-06 6.71218e-06 3.74476e-06"/>
+          <joint name="l_biceps_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true" actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+          <geom type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+          <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+          <geom pos="0 -0.045 0" quat="0 0.707107 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="DMF-B04(W)_s" />
+          <body name="l_elbow_link" pos="0 -0.045 0" quat="-1 0 0 0">
+            <inertial pos="0.00122543 -0.0228178 -0.000186297" quat="0.686351 0.714424 -0.06188 0.121204" mass="0.035" diaginertia="2.16972e-05 2.07702e-05 3.48297e-06"/>
+            <joint name="l_elbow_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+            <geom type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+            <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+            <geom pos="0 -0.024 0" quat="0 -1 0 0" type="mesh" rgba="1 1 1 1" mesh="SPU-5(W)_s" />
+            <geom pos="0 -0.0285 0" quat="0 -1 0 0" type="mesh" rgba="1 1 1 1" mesh="SPD-3B3(W)_s" />
+            <geom pos="0 -0.03 0" quat="0 -1 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+            <geom pos="0 -0.033 0" quat="0 -1 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+            <geom pos="0 -0.0375 0" quat="0 -0.707107 0 -0.707107" type="mesh" rgba="1 1 1 1" mesh="SPD-3B5(W)_s" />
+            <geom pos="-0.009 -0.039 0.018" quat="-0.5 0.5 -0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="0.012 -0.039 0.003" quat="0 0 -0.707107 -0.707107" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="0.012 -0.039 -0.009" quat="0 0 -0.707107 -0.707107" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="0.0135 -0.054 -0.003" quat="0.707107 0 0 -0.707107" type="mesh" rgba="1 1 1 1" mesh="SPD-4B5(W)_s" />
+            <geom pos="0.012 -0.075 -0.009" quat="0 0 0.707107 -0.707107" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="0.009 -0.072 -0.009" quat="-0.5 -0.5 -0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="0.012 -0.075 0.003" quat="0 0 0.707107 -0.707107" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="0.009 -0.072 0.003" quat="-0.5 -0.5 -0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="0 -0.0435 0" quat="0 -0.707107 0 -0.707107" type="mesh" rgba="1 1 1 1" mesh="SPD-3B5(W)_s" />
+          </body>
+        </body>
+      </body>
+      <body name="r_shoulder_link" pos="-0.015 -0.024 0.042" quat="-0.5 -0.5 0.5 -0.5">
+        <inertial pos="-0.00462267 0 0.0238587" quat="0.664434 0.664434 -0.241925 0.241925" mass="0.0052" diaginertia="1.58386e-06 1.2293e-06 6.62659e-07"/>
+        <joint name="r_shoulder_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true" actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+        <geom pos="-0.012 0 0.033" quat="0.5 0.5 0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="DMF-B03(W)_s" />
+        <body name="r_biceps_link" pos="-0.012 0 0.033" quat="0 0 0.707107 -0.707107">
+          <inertial pos="-0.000970064 -0.0120233 1.58733e-05" quat="0.706017 0.708113 -0.00752278 -0.00766483" mass="0.0281" diaginertia="8.04878e-06 6.71216e-06 3.74474e-06"/>
+          <joint name="r_biceps_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true" actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+          <geom type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+          <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+          <geom pos="0 -0.045 0" quat="0 0.707107 0 -0.707107" type="mesh" rgba="1 1 1 1" mesh="DMF-B04(W)_s" />
+          <body name="r_elbow_link" pos="0 -0.045 0" quat="-1 0 0 0">
+            <inertial pos="-0.00122623 -0.0228178 -0.000186297" quat="0.686342 0.71442 0.0619347 -0.121256" mass="0.035" diaginertia="2.16973e-05 2.077e-05 3.4829e-06"/>
+            <joint name="r_elbow_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+            <geom type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+            <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+            <geom pos="0 -0.024 0" quat="0 -1 0 0" type="mesh" rgba="1 1 1 1" mesh="SPU-5(W)_s" />
+            <geom pos="0 -0.0285 0" quat="0 -1 0 0" type="mesh" rgba="1 1 1 1" mesh="SPD-3B3(W)_s" />
+            <geom pos="0 -0.03 0" quat="0 -1 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+            <geom pos="0 -0.033 0" quat="0 -1 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+            <geom pos="0 -0.0375 0" quat="0 -0.707107 0 -0.707107" type="mesh" rgba="1 1 1 1" mesh="SPD-3B5(W)_s" />
+            <geom pos="0.009 -0.039 0.018" quat="-0.5 0.5 -0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="-0.012 -0.039 0.003" quat="0.707107 -0.707107 0 0" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="-0.012 -0.039 -0.009" quat="0.707107 -0.707107 0 0" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="-0.0135 -0.054 -0.003" quat="0 -0.707107 0.707107 0" type="mesh" rgba="1 1 1 1" mesh="SPD-4B5(W)_s" />
+            <geom pos="-0.012 -0.075 0.003" quat="-0.707107 -0.707107 0 0" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="-0.009 -0.072 0.003" quat="0.5 -0.5 -0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="-0.012 -0.075 -0.009" quat="-0.707107 -0.707107 0 0" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="-0.009 -0.072 -0.009" quat="0.5 -0.5 -0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="SPL-2B2(W)_s" />
+            <geom pos="0 -0.0435 0" quat="0 -0.707107 0 -0.707107" type="mesh" rgba="1 1 1 1" mesh="SPD-3B5(W)_s" />
+          </body>
+        </body>
+      </body>
+      <body name="l_hip_link" pos="-0.033 0.024 -0.03" quat="-0.5 0.5 -0.5 0.5">
+        <inertial pos="0.000603665 -0.00148177 0.0315648" quat="0.711136 0.686425 0.0599087 -0.139704" mass="0.0231" diaginertia="3.50238e-06 3.40791e-06 2.48841e-06"/>
+        <joint name="l_hip_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+        <geom pos="0 0 0.0165" quat="0.5 -0.5 0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="SPD-7V4(W)_s" />
+        <geom pos="0 0 0.0195" quat="0.5 -0.5 0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="SPD-3B5(W)_s" />
+        <geom pos="0 0.006 0.033" quat="0.707107 0 0.707107 0" type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+        <geom pos="0 -0.018 0.033" quat="0 0.707107 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="SPU-5(W)_s" />
+        <body name="l_thigh_link" pos="0 0.006 0.033" quat="0.707107 0 0.707107 0">
+          <inertial pos="-0.000970064 0.0313752 1.58733e-05" quat="0.650014 0.759903 -0.00516735 -0.00163318" mass="0.0281" diaginertia="8.91769e-06 7.67929e-06 3.64953e-06"/>
+          <joint name="l_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708" actuatorfrclimited="true" actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+          <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+          <geom quat="0 -0.707107 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="DMF-B04(W)_s" />
+          <geom pos="0 0.045 0" quat="1 0 0 0" type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+          <body name="l_knee_link" pos="0 0.045 0">
+            <inertial pos="-0.00620678 0.0164831 -0.00110645" quat="0.629697 0.770946 -0.0910147 -0.0290024" mass="0.0122" diaginertia="6.51436e-06 4.81036e-06 3.79454e-06"/>
+            <joint name="l_knee_joint" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+            <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+            <geom quat="0.5 -0.5 0.5 0.5" type="mesh" rgba="1 1 1 1" mesh="DMF-B05(W)_s" />
+            <body name="l_ankle_link" pos="0 0.042 0">
+              <inertial pos="0.00143496 -0.00637283 1.93091e-05" quat="0.70381 0.710124 -0.0159341 -0.0110471" mass="0.0231" diaginertia="3.47582e-06 3.35546e-06 2.6674e-06"/>
+              <joint name="l_ankle_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+              <geom type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+              <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+              <geom pos="0.0135 -0.009 0" quat="0 0.707107 0.707107 0" type="mesh" rgba="1 1 1 1" mesh="SPD-3B7(W)_s" />
+              <geom pos="0.0165 -0.003 0" quat="0 0.707107 0.707107 0" type="mesh" rgba="1 1 1 1" mesh="SPD-7V4(W)_s" />
+              <body name="l_foot_link" pos="0.033 -0.003 0" quat="-0.5 -0.5 0.5 0.5">
+                <inertial pos="-0.0127879 -0.00799813 0.0125892" quat="0.97691 0.032718 -0.190359 -0.0913223" mass="0.045" diaginertia="3.50734e-05 3.311e-05 1.1771e-05"/>
+                <joint name="l_foot_joint" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+                <site name="l_foot_ft_site" pos="0 0 0" size="0.01"/>
+                <geom type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+                <geom pos="-0.03 -0.009 0" quat="0.707107 0 0 -0.707107" type="mesh" rgba="1 1 1 1" mesh="DMF-B06(W)_s" />
+                <geom pos="-0.03 -0.009 0.03" quat="0.707107 0 0 -0.707107" type="mesh" rgba="0.6 0.6 0.6 1" mesh="DMF-B07(GR)_s" />
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="r_hip_link" pos="-0.033 -0.024 -0.03" quat="-0.5 0.5 -0.5 0.5">
+        <inertial pos="-0.000603665 -0.00148177 0.0315648" quat="0.711136 0.686425 -0.0599087 0.139704" mass="0.0231" diaginertia="3.50238e-06 3.40791e-06 2.48841e-06"/>
+        <joint name="r_hip_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+        <geom pos="0 0 0.0165" quat="0.5 -0.5 0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="SPD-7V4(W)_s" />
+        <geom pos="0 0 0.0195" quat="0.5 -0.5 0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="SPD-3B5(W)_s" />
+        <geom pos="0 0.006 0.033" quat="0.707107 0 -0.707107 0" type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+        <geom pos="0 -0.018 0.033" quat="0 -0.707107 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="SPU-5(W)_s" />
+        <body name="r_thigh_link" pos="0 0.006 0.033" quat="0.707107 0 -0.707107 0">
+          <inertial pos="0.000969731 0.0313752 1.58733e-05" quat="0.650014 0.759903 0.00517212 0.00158708" mass="0.0281" diaginertia="8.91769e-06 7.67931e-06 3.64955e-06"/>
+          <joint name="r_thigh_joint" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708" actuatorfrclimited="true" actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+          <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+          <geom quat="0 0.707107 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="DMF-B04(W)_s" />
+          <geom pos="0 0.045 0" quat="-1 0 0 0" type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+          <body name="r_knee_link" pos="0 0.045 0" quat="-1 0 0 0">
+            <inertial pos="0.00620602 0.0164831 -0.00110644" quat="0.629698 0.770946 0.0910171 0.0289592" mass="0.0122" diaginertia="6.51432e-06 4.81046e-06 3.79472e-06"/>
+            <joint name="r_knee_joint" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+            <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+            <geom quat="0.5 -0.5 -0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="DMF-B05(W)_s" />
+            <body name="r_ankle_link" pos="0 0.042 0">
+              <inertial pos="-0.00143536 -0.00637283 1.93091e-05" quat="0.703818 0.710112 0.0163443 0.0106693" mass="0.0231" diaginertia="3.47583e-06 3.35543e-06 2.66738e-06"/>
+              <joint name="r_ankle_joint" pos="0 0 0" axis="0 0 -1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+              <geom type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+              <geom pos="0 0 -0.015" quat="0.707107 0.707107 0 0" type="mesh" rgba="0.6 0.6 0.6 1" mesh="SPO-5(GR)_s" />
+              <geom pos="-0.0135 -0.009 0" quat="0.707107 0 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="SPD-3B7(W)_s" />
+              <geom pos="-0.0165 -0.003 0" quat="0.707107 0 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="SPD-7V4(W)_s" />
+              <body name="r_foot_link" pos="-0.033 -0.003 0" quat="0.5 0.5 0.5 0.5">
+                <inertial pos="0.0127879 -0.00799819 0.0125892" quat="0.976909 0.0327195 0.190359 0.0913363" mass="0.045" diaginertia="3.50734e-05 3.31099e-05 1.1771e-05"/>
+                <joint name="r_foot_joint" pos="0 0 0" axis="0 0 1" range="-1.5708 1.5708" actuatorfrclimited="true"actuatorfrcrange="-0.39 0.39" class="XL320_Motor"/>
+                <site name="r_foot_ft_site" pos="0 0 0" size="0.01"/>
+                <geom type="mesh" rgba="0.3 0.3 0.3 0.8" mesh="XL-320D" />
+                <geom pos="0.03 -0.009 0" quat="0.707107 0 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="DMF-B06(W)_s" />
+                <geom pos="0.03 -0.009 0.03" quat="0.707107 0 0 0.707107" type="mesh" rgba="0.6 0.6 0.6 1" mesh="DMF-B07(GR)_s" />
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <position name="r_shoulder" joint="r_shoulder_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="l_shoulder" joint="l_shoulder_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="r_biceps" joint="r_biceps_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="l_biceps" joint="l_biceps_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="r_elbow" joint="r_elbow_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="l_elbow" joint="l_elbow_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="r_hip" joint="r_hip_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="l_hip" joint="l_hip_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="r_thigh" joint="r_thigh_joint" kp="10" kv="0.5" ctrlrange="-1.5708 0.86"/>
+    <position name="l_thigh" joint="l_thigh_joint" kp="10" kv="0.5" ctrlrange="-0.86 1.5708"/>
+    <position name="r_knee" joint="r_knee_joint" kp="10" kv="0.5" ctrlrange="-0.189 1.5708 "/>
+    <position name="l_knee" joint="l_knee_joint" kp="10" kv="0.5" ctrlrange="-1.5708 0.189"/>
+    <position name="r_ankle" joint="r_ankle_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="l_ankle" joint="l_ankle_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="r_foot" joint="r_foot_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+    <position name="l_foot" joint="l_foot_joint" kp="10" kv="0.5" ctrlrange="-1.5708 1.5708"/>
+  </actuator>
+  <contact>
+    <exclude body1="r_knee_link" body2="r_ankle_link"/>
+    <exclude body1="r_ankle_link" body2="r_foot_link"/>
+    <exclude body1="r_knee_link" body2="r_foot_link"/>
+    <exclude body1="l_knee_link" body2="l_ankle_link"/>
+    <exclude body1="l_ankle_link" body2="l_foot_link"/>
+    <exclude body1="l_knee_link" body2="l_foot_link"/>
+    <exclude body1="torso" body2="l_shoulder_link"/>
+    <exclude body1="torso" body2="r_shoulder_link"/>
+    <exclude body1="torso" body2="r_hip_link"/>
+    <exclude body1="torso" body2="l_hip_link"/>
+    <exclude body1="torso" body2="r_thigh_link"/>
+    <exclude body1="torso" body2="l_thigh_link"/>
+  </contact>
+
+  <sensor>
+    <framequat name="imu_sensor_quat" objtype="body" objname="imu_link"/>
+    <gyro name="imu_sensor_gyro" site="imu_site" noise="0"/>
+    <accelerometer name="imu_sensor_accel" site="imu_site" noise="0"/>
+    <force name="LF_FT_sensor_force" site="l_foot_ft_site"/>
+    <torque name="LF_FT_sensor_torque" site="l_foot_ft_site"/>
+    <force name="RF_FT_sensor_force" site="r_foot_ft_site"/>
+    <torque name="RF_FT_sensor_torque" site="r_foot_ft_site"/>
+  </sensor>
+</mujoco>

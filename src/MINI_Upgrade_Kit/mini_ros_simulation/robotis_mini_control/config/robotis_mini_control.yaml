@@ -1,0 +1,48 @@
+robotis_mini:
+  #controller params
+  pid_params: &id001
+    p: 4.0
+    i: 0.0
+    d: 0.01
+    
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  whole_body_controller:
+      type: effort_controllers/JointTrajectoryController
+      joints:
+        - l_shoulder_joint
+        - r_shoulder_joint
+        - l_biceps_joint
+        - r_biceps_joint
+        - l_elbow_joint
+        - r_elbow_joint
+        - l_hip_joint
+        - r_hip_joint
+        - l_thigh_joint
+        - r_thigh_joint
+        - l_knee_joint
+        - r_knee_joint
+        - l_ankle_joint
+        - r_ankle_joint
+        - l_foot_joint
+        - r_foot_joint
+      gains: # Required because we're controlling an effort interface
+        l_shoulder_joint: *id001
+        r_shoulder_joint: *id001
+        l_biceps_joint: *id001
+        r_biceps_joint: *id001
+        l_elbow_joint: *id001
+        r_elbow_joint: *id001
+        l_hip_joint: *id001
+        r_hip_joint: *id001
+        l_thigh_joint: *id001
+        r_thigh_joint: *id001
+        l_knee_joint: *id001
+        r_knee_joint: *id001
+        l_ankle_joint: *id001
+        r_ankle_joint: *id001
+        l_foot_joint: *id001
+        r_foot_joint: *id001

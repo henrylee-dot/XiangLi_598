@@ -1,0 +1,27 @@
+<launch>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="model" default="$(find robotis_mini_description)/urdf/robotis_mini.urdf"/>
+  <arg name="model_xml" default="$(find robotis_mini_description)/urdf/mini_scene.xml"/>
+  <arg name="config" default="$(find robotis_mini_mujoco)/config/robotis_mini.yaml"/>
+  <arg name="sim_rate" default="100"/>
+  <!-- MuJoCo is installed in the package venv, not system Python -->
+  <arg name="python_exe" default="$(find robotis_mini_mujoco)/.venv/bin/python3"/>
+
+  <param name="use_sim_time" value="$(arg use_sim_time)"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+    <remap from="/joint_states" to="/robotis_mini/joint_states"/>
+  </node>
+
+  <node name="mujoco_ros_node" pkg="robotis_mini_mujoco" type="mujoco_ros_interface.py"
+        launch-prefix="$(arg python_exe)"
+        output="screen" respawn="false">
+    <env name="PYTHONPATH" value="$(find robotis_mini_mujoco):$(env PYTHONPATH)"/>
+    <rosparam file="$(arg config)" command="load"/>
+    <param name="model_xml" value="$(arg model_xml)"/>
+    <param name="sim_rate" value="$(arg sim_rate)"/>
+  </node>
+</launch>

@@ -1,0 +1,21 @@
+<launch>
+  <!-- Real Robotis MINI (U2D2 + XL-320) + camera pose imitation.
+       Hold or suspend the robot: Ctrl+C turns all servo torque off. -->
+  <arg name="camera_source" default="win"/>
+  <!-- Legs off by default on the real robot: start with arms only -->
+  <arg name="imitate_legs" default="false"/>
+  <arg name="balance_filter" default="true"/>
+  <arg name="max_joint_speed" default="2.0"/>
+  <arg name="log_file" default=""/>
+
+  <node name="real_robot_bridge" pkg="final_project" type="real_robot_bridge.py" output="screen" required="true">
+    <param name="max_joint_speed" value="$(arg max_joint_speed)"/>
+  </node>
+
+  <node name="pose_imitation" pkg="final_project" type="pose_imitation.py" output="screen">
+    <param name="camera_source" value="$(arg camera_source)" type="str"/>
+    <param name="imitate_legs" value="$(arg imitate_legs)"/>
+    <param name="balance_filter" value="$(arg balance_filter)"/>
+    <param name="log_file" value="$(arg log_file)"/>
+  </node>
+</launch>

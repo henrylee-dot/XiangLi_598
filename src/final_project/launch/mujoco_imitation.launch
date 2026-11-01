@@ -1,0 +1,24 @@
+<launch>
+  <!-- MuJoCo simulation + camera pose imitation (pose_imitation.py) -->
+  <!-- "0" = /dev/video0 (laptop camera via usbipd), "win" = external PC Cam via win_camera_sender.py -->
+  <arg name="camera_source" default="0"/>
+  <arg name="imitate_legs" default="true"/>
+  <!-- Center-of-mass safety filter on leg commands -->
+  <arg name="balance_filter" default="true"/>
+  <arg name="model_path" default="$(env HOME)/ws_mini/vision/pose_landmarker_full.task"/>
+  <!-- Per-frame timing/landmark/command log (.npz); empty = off -->
+  <arg name="log_file" default=""/>
+
+  <!-- Same as robotis_mini_control/mujoco_sim.launch, with this package's sim config -->
+  <include file="$(find robotis_mini_mujoco)/launch/mujoco_bringup_mini.launch">
+    <arg name="config" value="$(find final_project)/config/mujoco_sim.yaml"/>
+  </include>
+
+  <node name="pose_imitation" pkg="final_project" type="pose_imitation.py" output="screen">
+    <param name="camera_source" value="$(arg camera_source)" type="str"/>
+    <param name="imitate_legs" value="$(arg imitate_legs)"/>
+    <param name="balance_filter" value="$(arg balance_filter)"/>
+    <param name="model_path" value="$(arg model_path)"/>
+    <param name="log_file" value="$(arg log_file)"/>
+  </node>
+</launch>

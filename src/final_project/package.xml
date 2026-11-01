@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>final_project</name>
+  <version>0.1.0</version>
+  <description>Final project: camera pose imitation for Robotis MINI in MuJoCo</description>
+  <maintainer email="xiangl18@illinois.edu">Xiang Li</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>trajectory_msgs</exec_depend>
+  <exec_depend>robotis_mini_control</exec_depend>
+  <exec_depend>robotis_mini_mujoco</exec_depend>
+</package>

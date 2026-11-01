@@ -1,0 +1,16 @@
+<launch>
+  <!-- <node name="center_of_mass" pkg="robotis_mini_control" type="com.py" required="true">
+    <param name="base_link_frame" value="world"/>
+  </node> -->
+  <node name="odom" pkg="robotis_mini_control" type="odom.py" required="true" />
+  <node name="ft_contact" pkg="robotis_mini_control" type="ft_contact.py" required="true" />
+
+   <!-- launch rviz-->
+  <arg name="rvizconfig" default="$(find robotis_mini_description)/rviz/robotis_mini.rviz" />
+  <!-- WSLg D3D12 can omit mesh geometry in RViz; keep the workaround local to RViz. -->
+  <arg name="rviz_software_rendering" default="true" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true">
+    <env name="LIBGL_ALWAYS_SOFTWARE" value="$(arg rviz_software_rendering)" />
+    <env name="LP_NUM_THREADS" value="2" />
+  </node>
+</launch>

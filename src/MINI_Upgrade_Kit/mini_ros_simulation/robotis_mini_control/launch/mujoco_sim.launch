@@ -1,0 +1,5 @@
+<launch>
+  <!-- sets and launches gazebo for robotis mini -->
+  <include file="$(find robotis_mini_mujoco)/launch/mujoco_bringup_mini.launch" />
+  
+</launch>

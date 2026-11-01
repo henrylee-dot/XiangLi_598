@@ -1,0 +1,19 @@
+# catkin build output
+build/
+devel/
+
+# Python
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# Editor
+**/.vscode/
+
+# Not part of this repository (kept locally only)
+assignment2_results/
+recordings/
+final_project_package/
+
+# Original git history of the MINI_Upgrade_Kit clone (renamed so its files can be tracked here)
+src/MINI_Upgrade_Kit/.git.upstream/

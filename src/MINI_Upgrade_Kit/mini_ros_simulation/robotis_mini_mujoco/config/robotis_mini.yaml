@@ -1,0 +1,78 @@
+model_name: robotis_mini
+base_body_name: torso
+floating_joint_name: floating_base_joint
+base_link_offset_rpy: [0.0, 0.0, 0.0]
+base_link_offset_xyz: [0.0, 0.0, 0.0]
+
+joint_states_topic: /robotis_mini/joint_states
+joint_cmd_topic: /robotis_mini/sim_position_controller/command
+joint_trajectory_topic: /robotis_mini/whole_body_controller/command
+
+joint_names:
+  - r_hip_joint
+  - r_thigh_joint
+  - r_knee_joint
+  - r_ankle_joint
+  - r_foot_joint
+  - l_hip_joint
+  - l_thigh_joint
+  - l_knee_joint
+  - l_ankle_joint
+  - l_foot_joint
+  - l_shoulder_joint
+  - l_biceps_joint
+  - l_elbow_joint
+  - r_shoulder_joint
+  - r_biceps_joint
+  - r_elbow_joint
+
+initial_joint_positions:
+  r_hip_joint: 0.0
+  r_thigh_joint: -0.111
+  r_knee_joint: 1.12
+  r_ankle_joint: 1.03
+  r_foot_joint: 0
+  l_hip_joint: 0.0
+  l_thigh_joint: 0.111
+  l_knee_joint: -1.12
+  l_ankle_joint: -1.03
+  l_foot_joint: 0.0
+  l_shoulder_joint: 0.0
+  l_biceps_joint: 0.501
+  l_elbow_joint: 1.39
+  r_shoulder_joint: 0.0
+  r_biceps_joint: -0.501
+  r_elbow_joint: -1.39
+
+pd_control_enabled: false
+pd_kp: 20.0
+pd_kd: 0.001
+
+camera_name: camera
+camera_ns: /robotis_mini/camera1
+camera_frame_id: camera_link
+camera_rate: 30.0
+
+imu_topic: /imu/data
+imu_frame_id: imu_link
+imu_rate: 100.0
+imu_quat_sensor: imu_sensor_quat
+imu_gyro_sensor: imu_sensor_gyro
+imu_accel_sensor: imu_sensor_accel
+
+ft_rate: 100.0
+lf_ft_topic: /LF_FT_sensor
+rf_ft_topic: /RF_FT_sensor
+lf_ft_frame_id: l_foot_link
+rf_ft_frame_id: r_foot_link
+lf_ft_force_sensor: LF_FT_sensor_force
+lf_ft_torque_sensor: LF_FT_sensor_torque
+rf_ft_force_sensor: RF_FT_sensor_force
+rf_ft_torque_sensor: RF_FT_sensor_torque
+
+viewer_azimuth: 135
+viewer_distance: 0.7
+viewer_elevation: -20
+viewer_lookat: [0.0, 0.0, 0.12]
+
+elastic_band_enabled: false
